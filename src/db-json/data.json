@@ -1,0 +1,42 @@
+{
+    "automezzi": [
+      {
+        "codice": "A123",
+        "targa": "AB123CD",
+        "marca": "Fiat",
+        "modello": "Panda"
+      },
+      {
+        "codice": "A124",
+        "targa": "EF456GH",
+        "marca": "Ford",
+        "modello": "Focus"
+      },
+      {
+        "codice": "A125",
+        "targa": "EF456GH",
+        "marca": "Ford",
+        "modello": "Focus"
+      },
+      {
+        "codice": "A126",
+        "targa": "EF456GH",
+        "marca": "Ford",
+        "modello": "Focus"
+      }
+    ],
+    "filiali": [
+      {
+        "codice": "F123",
+        "indirizzo": "Via Milano 3",
+        "città": "Roma",
+        "cap": "00100"
+      },
+      {
+        "codice": "F456",
+        "indirizzo": "Via Napoli 4",
+        "città": "Napoli",
+        "cap": "80100"
+      }
+    ]
+  }
