@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import DetailsRow from '../components/detailsRow';
-import { deleteAutomezzoByCodice, deleteFilialeByCodice } from '../services/apiServices';
+import { addAutomezzo, addFiliale, deleteAutomezzoByCodice, deleteFilialeByCodice, getAutomezzi, getFiliali } from '../services/apiServices';
 
-interface GestioneProps {
-    automezzi: any[];
-    filiali: any[];
-}
-
-const Gestione: React.FC<any> = ({ automezzi, filiali }) => {
+const Gestione: React.FC<any> = () => {
     const [newAutomezzo, setNewAutomezzo] = useState({ codice: '', targa: '', marca: '', modello: '' });
     const [newFiliale, setNewFiliale] = useState({ codice: '', indirizzo: '', città: '', cap: '' });
+
+    const [automezzi, setAutomezzi] = useState([]);
+    const [filiali, setFiliali] = useState([]);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const automezziData = await getAutomezzi();
+                setAutomezzi(automezziData);
+                const filialiData = await getFiliali();
+                setFiliali(filialiData);
+            } catch (err: any) {
+                alert(err.message);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const navigateToAutomezzo = (code: string) => {
         navigate(`/automezzo/${code}`);
@@ -22,20 +36,30 @@ const Gestione: React.FC<any> = ({ automezzi, filiali }) => {
         navigate(`/filiale/${code}`);
     }
 
-    const deleteAutomezzoByCode = (code: string) => {
-        deleteAutomezzoByCodice(code)
+    async function deleteAutomezzoByCode(code: string): Promise<void> {
+        await deleteAutomezzoByCodice(code)
+        setAutomezzi(automezzi.filter((automezzo: any) => automezzo.codice !== code));
     }
 
-    const deleteFilialeByCode = (code: string) => {
-        deleteFilialeByCodice(code)
+    async function deleteFilialeByCode(code: string): Promise<void> {
+        await deleteFilialeByCodice(code)
+        setFiliali(filiali.filter((filiale: any) => filiale.codice !== code));
     }
 
-    function handleAddAutomezzo(event: any): void {
-        throw new Error('Function not implemented.');
+    async function handleAddAutomezzo(): Promise<void> {
+        if (newAutomezzo.codice && newAutomezzo.targa && newAutomezzo.marca && newAutomezzo.modello) {
+            await addAutomezzo(newAutomezzo)
+        } else {
+            alert("Compilare tutti i campi")
+        }
     }
 
-    function handleAddFiliale(event: any): void {
-        throw new Error('Function not implemented.');
+    async function handleAddFiliale(): Promise<void> {
+        if (newFiliale.codice && newFiliale.indirizzo && newFiliale.città && newFiliale.cap) {
+            await addFiliale(newFiliale)
+        } else {
+            alert("Compilare tutti i campi")
+        }
     }
 
     return (

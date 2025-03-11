@@ -6,7 +6,6 @@ const AutomezzoFilialeDetails = () => {
   const { codice } = useParams();
   const location = useLocation();
   const [data, setData] = useState<any>(null);
-  const [error, setError] = useState(null);
 
   const baseUrl = location.pathname.split('/').slice(0, -1).join('/');
 
@@ -16,21 +15,16 @@ const AutomezzoFilialeDetails = () => {
         const data = baseUrl === "/automezzo" ? await getAutomezzoByCodice(codice) : await getFilialeByCodice(codice);
         setData(data);
       } catch (err: any) {
-        setError(err.message);
+        alert(err.message);
       }
     };
 
     fetchData();
   }, [codice, baseUrl]);
 
-  if (error) {
-    return <p className="error">{error}</p>;
-  }
-
   if (!data) {
     return <p>Loading...</p>;
   }
-
 
   return ( baseUrl === "/automezzo" ? (
     <div>
