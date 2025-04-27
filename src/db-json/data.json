@@ -27,6 +27,13 @@
       "marca": "Ford",
       "modello": "Focus",
       "id": "5063"
+    },
+    {
+      "id": "42bb",
+      "codice": "A127",
+      "targa": "AB6784Q",
+      "marca": "Porche",
+      "modello": "Kayen"
     }
   ],
   "filiali": [

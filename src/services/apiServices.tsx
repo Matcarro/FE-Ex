@@ -1,5 +1,32 @@
 const API_URL = 'http://localhost:3001';
 
+export interface LoginResponse {
+  token: string;
+  refreshToken: string;
+}
+
+export const login = async (email: string, password: string): Promise<LoginResponse> => {
+  const response = await fetch('https://run.mocky.io/v3/35ebab01-1cd0-4bf3-a1cd-f0ed4f405509', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+      throw new Error('Invalid credentials');
+  }
+
+  return response.json();
+};
+
+export const getUser = async (): Promise<any> => {
+  const response = await fetch('https://run.mocky.io/v3/a806af49-2323-4cbe-95b9-60f7e3760ff8');
+  if (!response.ok) {
+      throw new Error('Invalid credentials');
+  }
+  return response.json();
+};
+
 export const getAutomezzi = async () => {
   const response = await fetch(`${API_URL}/automezzi`);
   if (!response.ok) {
@@ -97,3 +124,7 @@ export const addFiliale = async (filiale: any) => {
   }
   return response.json();
 };
+
+export const updateAutomezzo = async (automezzo: any) => {
+  console.log("fanculo");
+}

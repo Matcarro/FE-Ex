@@ -142,3 +142,22 @@
   transform: translateX(-50%);
   font-size: 24px;
 }
+
+.login-form {
+  flex-direction: column;
+}
+
+.form-group {
+  text-align: left;
+  width: 100%;
+}
+
+.login-button {
+  width: 100%;
+  box-sizing: border-box 
+}
+
+.login-input {
+  width: 100%;
+  box-sizing: border-box 
+}
